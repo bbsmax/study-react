@@ -6,11 +6,11 @@ import Counter from "./Counter";
 function App() {
   return (
     <>
-       {/* <Wrapper>
-            <Hello name="react" isSpecial={true} />
+      {/* <Wrapper>
+            <Hello name="react" isSpecial={true} /> 테스트 파일
             <Hello />
         </Wrapper>*/}
-        <Counter />
+      <Counter />
     </>
 
   );
