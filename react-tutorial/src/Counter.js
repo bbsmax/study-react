@@ -5,7 +5,7 @@ function Counter(){
 
     const onIncrement = () => {
         console.log("+1")
-        setNumber(prevNumber => prevNumber + 1)
+        setNumber(prevNumber => prevNumber + 1) //이전상태값을 관리한다.
     }
     const  onDecrement = () => {
         console.log("-1")
