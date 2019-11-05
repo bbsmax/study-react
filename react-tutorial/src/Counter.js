@@ -9,7 +9,7 @@ function Counter(){
     }
     const  onDecrement = () => {
         console.log("-1")
-        //setNumber(number - 1) 이와같이 설정할 수 있다.
+        //setNumber(number - 1) 이와같이 설정할 수 있다. 테스트 합니다.
         setNumber(prevNumber => prevNumber -1)
     }
     return (
