@@ -3,6 +3,7 @@ import Hello from "./Hello";
 import Wrapper from "./Wrapper";
 import Counter from "./Counter";
 import InputSample from './InputSample';
+import MultiInput from './MultiInput';
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
             <Hello />
         </Wrapper>*/}
       {/* <Counter /> */}
-      <InputSample />
+      {/* <InputSample /> */}
+      <MultiInput />
     </>
 
   );
