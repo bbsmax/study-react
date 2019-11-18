@@ -11,4 +11,4 @@ function Create({ onChange, onCreate, onInit, initInput, username, email }) {
     )
 }
 
-export default Create;
+export default React.memo(Create);

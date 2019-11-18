@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useMemo, useCallback } from 'react';
 import Hello from "./Hello";
 import Wrapper from "./Wrapper";
 import Counter from "./Counter";
@@ -7,10 +7,14 @@ import MultiInput from './MultiInput';
 import UserList from './UserList';
 import Create from './Create';
 
+function countActiveUsers(users) {
+  console.log("활성사용자 수 ::::")
+  return users.filter(user => user.active).length;
+}
+
 function App() {
 
   //user 상태관리하기위해 useState을 사용함.
-
   const [users, setUsers] = useState([
     {
       id: '1',
@@ -41,23 +45,25 @@ function App() {
   const initInput = useRef();
   const { username, email } = inputs;
 
-  const onChange = e => {
+  const onChange = useCallback(e => {
     const { name, value } = e.target;
     setInput({
       ...inputs,
       [name]: value
     })
-  };
+  }, [inputs]);
 
-  const onRemove = id => {
+  const onRemove = useCallback(id => {
+    setUsers(users.filter(item => item.id !== id))
+  }, [users]);
 
-  };
+  const onToggle = useCallback(id => {
+    setUsers(users.map(item =>
+      item.id === id ? { ...item, active: !item.active } : item
+    ))
+  }, [users]);
 
-  const onToggle = id => {
-
-  };
-
-  const onCreate = () => {
+  const onCreate = useCallback(() => {
     onInit();
     console.log("::: username ::::", username);
     const newUser = {
@@ -71,7 +77,7 @@ function App() {
 
     nextId.current++;
     console.log("nextId : ", nextId);
-  }
+  }, [username, email, users]);
 
   const onInit = () => {
     console.log("초기화")
@@ -85,6 +91,12 @@ function App() {
 
   }
 
+  //useMemo을 사용함으로써 users가 바뀔때만 실행됨.
+  const count = useMemo(() => countActiveUsers(users), [users]);
+
+
+  //useCallback 은 함수를 재사용함.
+
   return (
     <>
       {/* <Wrapper>
@@ -96,6 +108,7 @@ function App() {
       {/* <MultiInput /> */}
       <Create username={username} email={email} onInit={onInit} initInput={initInput} onChange={onChange} onCreate={onCreate} />
       <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
+      <div>활성사용자 수 : {count}</div>
     </>
 
   );
